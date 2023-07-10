@@ -7,10 +7,12 @@ class Array
  end
 
  def my_select(&block)
-
-  if self.my_each(&block)
-  new_arr
- end
+  narr = []
+  self.my_each do |num|
+    narr << num if block.call(num)
+ end 
+ return narr
+end
 
 end
 
@@ -18,16 +20,3 @@ a = [1, 2, 3]
 p a.my_select { |num| num > 1 } # => [2, 3]
 p a.my_select { |num| num == 4 } # => []
 
-# return_value = [1, 2, 3].my_each do |num|
-#   puts num
-#  end.my_each do |num|
-#   puts num
-#  end
-#  # => 1
-#  #    2
-#  #    3
-#  #    1
-#  #    2
-#  #    3
-
-#  p return_value  # => [1, 2, 3]
